@@ -10,8 +10,10 @@ const StudentList = () => {
     const fetchData = async () => {
       try {
         const data = await getAllStudents();
-        setStudents(data);
-        setFilteredStudents(data);
+        console.log("data--->", data);
+        const sortedStudents = data.sort((a, b) => parseInt(a.class, 10) - parseInt(b.class, 10));
+        setStudents(sortedStudents);
+        setFilteredStudents(sortedStudents);
       } catch (error) {
         console.error(error);
       }
@@ -21,12 +23,20 @@ const StudentList = () => {
 
   const handleSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
-    const filtered = students.filter(student => student.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    setFilteredStudents(filtered);
+    filterStudentsByName(searchTerm);
+  };
+
+  const filterStudentsByName = (searchTerm) => {
+    if (searchTerm === '') {
+      setFilteredStudents(students);
+    } else {
+      const filtered = students.filter(student => student.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      setFilteredStudents(filtered);
+    }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-8">
+    <div className="py-8">
       <div className="container mx-auto">
         <input
           type="text"
@@ -38,9 +48,18 @@ const StudentList = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {filteredStudents.map(student => (
             <div key={student.id} className="bg-white p-4 rounded-lg shadow-md">
+              {/* <div className='flex'> */}
+
+              {student.image && <div className="flex -space-x-2 overflow-hidden">
+        <img className="inline-block h-10 w-10 rounded-full ring-2 ring-white" src={student.image} alt={`Image of ${student.name}`} />
+        </div>}
+              {/* </div> */}
               <h2 className="text-lg font-semibold mb-2">{student.name}</h2>
               <p>Class: {student.class}</p>
               <p>Roll Number: {student.rollNumber}</p>
+              {/* {student.image && (
+                <img src={student.image} alt={`Image of ${student.name}`} className="mt-4 w-full rounded-lg" />
+              )} */}
             </div>
           ))}
         </div>

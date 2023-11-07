@@ -8,18 +8,19 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Manage Students</h2>
-            <p className="text-gray-600">Add, view, and manage student records.</p>
             <a href="/students" className="mt-4 block text-blue-500 hover:underline">Go to Students</a>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Manage Teachers</h2>
-            <p className="text-gray-600">Add, view, and manage teacher records.</p>
             <a href="/teachers" className="mt-4 block text-blue-500 hover:underline">Go to Teachers</a>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Manage Subjects</h2>
-            <p className="text-gray-600">Add, view, and manage subject records.</p>
             <a href="/subjects" className="mt-4 block text-blue-500 hover:underline">Go to Subjects</a>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Subjects of Student and their Teachers</h2>
+            <a href="/lists" className="mt-4 block text-blue-500 hover:underline">Go to Page</a>
           </div>
         </div>
       </div>

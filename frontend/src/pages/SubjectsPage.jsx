@@ -1,13 +1,11 @@
 import React from 'react';
 import SubjectForm from '../components/SubjectForm';
-import SubjectList from '../components/SubjectList';
 
 const StudentsPage = () => {
   return (
-    <div>
-      <h1>Subject Page</h1>
+    <div className="container mx-auto py-8">
+      <h1 className='text-3xl font-bold text-gray-800 mb-4'>Subject Page</h1>
       <SubjectForm />
-      <SubjectList />
     </div>
   );
 };

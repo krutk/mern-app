@@ -14,15 +14,16 @@ router.get('/', async (req, res) => {
 
 // Add a subject
 router.post('/', async (req, res) => {
-  const subject = new Subject({
-    name: req.body.name,
-    class: req.body.class,
-    languages: req.body.languages
-  });
   try {
-    const newSubject = await subject.save();
-    res.status(201).json(newSubject);
-  } catch (err) {
+    const newSubject = await Subject.create({
+      name: req.body.name,
+      class: req.body.class,
+      languages: req.body.languages,
+      teacherTeaching: req.body.teacherTeaching
+    });
+    const populatedSubject = await Subject.findById(newSubject._id).populate('teacherTeaching');
+    res.status(201).json(populatedSubject);
+  } catch (error) {
     res.status(400).json({ message: err.message });
   }
 });

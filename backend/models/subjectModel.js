@@ -9,7 +9,11 @@ const subjectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  languages: [String]
+  languages: [String],
+  teacherTeaching: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Teacher'
+  }
 });
 
 module.exports = mongoose.model('Subject', subjectSchema);

@@ -13,7 +13,13 @@ const teacherSchema = new mongoose.Schema({
   sex: {
     type: String,
     required: true
-  }
+  },
+  subjectsTaught: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Subject'
+    }
+  ]
 });
 
 module.exports = mongoose.model('Teacher', teacherSchema);

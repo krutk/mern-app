@@ -1,31 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const Subject = require('../models/subjectModel');
+const Teacher = require('../models/teacherModel.js');
 
-// Get all subjects
+// Get all teachers
 router.get('/', async (req, res) => {
   try {
-    const subjects = await Subject.find();
-    res.json(subjects);
+    const teachers = await Teacher.find();
+    res.json(teachers);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Add a subject
+// Add a teacher
 router.post('/', async (req, res) => {
-  const subject = new Subject({
-    name: req.body.name,
-    class: req.body.class,
-    languages: req.body.languages
-  });
+  const { name, age, image, sex, subjectsTaught } = req.body;
+
   try {
-    const newSubject = await subject.save();
-    res.status(201).json(newSubject);
+    const newTeacher = await Teacher.create({
+      name,
+      age,
+      image,
+      sex,
+      subjectsTaught
+    });
+
+    const populatedTeacher = await Teacher.findById(newTeacher._id).populate('subjectsTaught');
+    
+    res.status(201).json(populatedTeacher);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 
 module.exports = router;

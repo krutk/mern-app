@@ -17,8 +17,8 @@ export const addStudent = async (studentData) => {
     const response = await axios.post(`${baseURL}/students`, studentData);
     return response.data;
   } catch (error) {
-    console.error('Error adding student:', error);
-    throw error;
+    console.error('Error adding student:', error.response.data.message);
+    throw error.response.data.message;
   }
 };
 

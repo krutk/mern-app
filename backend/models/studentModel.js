@@ -10,11 +10,18 @@ const studentSchema = new mongoose.Schema({
     required: true
   },
   image: String,
-  class: String,
+  class: Number,
   rollNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
+  subjectsStuding: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Subject'
+    }
+  ]
 });
 
 module.exports = mongoose.model('Student', studentSchema);
